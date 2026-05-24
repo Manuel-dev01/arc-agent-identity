@@ -2,7 +2,7 @@
 
 On-chain identity and append-only reasoning-trace anchoring for autonomous agents on Arc.
 
-A composable primitive for Arc builders: register a `bytes32` agent identity, then publish content-addressed reasoning traces that anyone can verify against an Irys/Arweave receipt. Two files — a 60-line Solidity contract and a thin TypeScript SDK — designed to be forked, imported, and shipped on top of.
+A composable primitive for Arc builders: register a `bytes32` agent identity, then publish content-addressed reasoning traces that anyone can verify against an Irys/Arweave receipt. Two files, a 60-line Solidity contract and a thin TypeScript SDK designed to be forked, imported, and shipped on top of.
 
 ## What this gives you
 
