@@ -1,0 +1,40 @@
+{
+  "name": "@arc/agent-identity",
+  "version": "0.1.0",
+  "description": "On-chain agent identity and append-only reasoning-trace anchoring for Arc. Composable SDK around AgentRegistry.sol.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "arc",
+    "circle",
+    "agents",
+    "agent-identity",
+    "reasoning-traces",
+    "irys",
+    "bytes32"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "viem": "^2.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}
