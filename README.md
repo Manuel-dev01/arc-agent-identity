@@ -114,7 +114,7 @@ The trace schema is `agent.trace.v1`. If you need a different shape, fork the Zo
 
 | Network | Address | Status |
 |---|---|---|
-| Arc testnet (chain 5042002) | `0x0000000000000000000000000000000000000000` | _to be filled in after deploy_ |
+| Arc testnet (chain 5042002) | [`0xb0969950a09117d871b1D344B5a96b9a3C84EAC7`](https://testnet.arcscan.app/address/0xb0969950a09117d871b1D344B5a96b9a3C84EAC7) | Live. Deploy tx: [`0x7eb32645...59fe06ab`](https://testnet.arcscan.app/tx/0x7eb3264533b6f33f24720b6251a794868f20fa06bf73eaf3c0bc8e3759fe06ab) |
 
 The Stoa hackathon submission ([github.com/...](https://github.com)) uses an earlier version of this contract under the name `StoaRegistry` at `0x19Ea8a442802065a61c69cbc03bE97724Ad8cd9b`. That deployment is functionally compatible at the bytecode level but emits events under different names; use the canonical OSS deployment above for new integrations.
 

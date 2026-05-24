@@ -20,4 +20,4 @@ export type { IrysUploadResult } from './irys.js'
 export const ARC_TESTNET_CHAIN_ID = 5042002
 
 /** Canonical OSS deployment of AgentRegistry on Arc testnet. */
-export const ARC_TESTNET_AGENT_REGISTRY: `0x${string}` = '0x0000000000000000000000000000000000000000'
+export const ARC_TESTNET_AGENT_REGISTRY: `0x${string}` = '0xb0969950a09117d871b1D344B5a96b9a3C84EAC7'
