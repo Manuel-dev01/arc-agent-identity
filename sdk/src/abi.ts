@@ -1,5 +1,5 @@
 /**
- * Minimal AgentRegistry ABI — only the surface the SDK calls.
+ * Minimal AgentRegistry ABI, only the surface the SDK calls.
  * The full ABI is emitted by `forge build` at contracts/out/AgentRegistry.sol/AgentRegistry.json
  * if you need event decoding for everything.
  */

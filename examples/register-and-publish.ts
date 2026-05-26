@@ -7,7 +7,7 @@
  *     npx tsx examples/register-and-publish.ts
  */
 
-import { AgentRegistry, uploadToIrys, ARC_TESTNET_CHAIN_ID } from '@arc/agent-identity'
+import { AgentRegistry, uploadToIrys, ARC_TESTNET_CHAIN_ID } from '@stoa-agents/arc-agent-identity'
 
 async function main() {
   const privateKey = process.env.PRIVATE_KEY

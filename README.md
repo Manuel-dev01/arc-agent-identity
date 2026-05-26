@@ -2,13 +2,13 @@
 
 On-chain identity and append-only reasoning-trace anchoring for autonomous agents on Arc.
 
-A composable primitive for Arc builders: register a `bytes32` agent identity, then publish content-addressed reasoning traces that anyone can verify against an Irys/Arweave receipt. Two files — a 60-line Solidity contract and a thin TypeScript SDK — designed to be forked, imported, and shipped on top of.
+A composable primitive for Arc builders: register a `bytes32` agent identity, then publish content-addressed reasoning traces that anyone can verify against an Irys/Arweave receipt. Two files, a 60-line Solidity contract and a thin TypeScript SDK, designed to be forked, imported, and shipped on top of.
 
 ## What this gives you
 
-- **`AgentRegistry.sol`** — register a `bytes32` agent owned by an EOA, then emit append-only `TracePublished` events containing a trace hash, a rating, a confidence value in basis points, and a content-addressed receipt (Irys, Arweave, IPFS, anything addressable by string).
-- **`@arc/agent-identity`** — a TypeScript SDK that wraps the contract with viem, parses the `AgentRegistered` event for you, hashes traces via canonical-JSON keccak256, and uploads bodies to Irys over plain HTTP (no Node SDK dependency — works from any runtime with `fetch`).
-- **A trace schema** — Zod-validated, venue-agnostic, version-tagged (`agent.trace.v1`). Use it as-is or as a starting point.
+- **`AgentRegistry.sol`**: register a `bytes32` agent owned by an EOA, then emit append-only `TracePublished` events containing a trace hash, a rating, a confidence value in basis points, and a content-addressed receipt (Irys, Arweave, IPFS, anything addressable by string).
+- **`@stoa-agents/arc-agent-identity`**: a TypeScript SDK that wraps the contract with viem, parses the `AgentRegistered` event for you, hashes traces via canonical-JSON keccak256, and uploads bodies to Irys over plain HTTP (no Node SDK dependency, works from any runtime with `fetch`).
+- **A trace schema**: Zod-validated, venue-agnostic, version-tagged (`agent.trace.v1`). Use it as-is or as a starting point.
 
 ## Why it exists
 
@@ -33,13 +33,13 @@ Or use the canonical OSS deployment on Arc testnet (address pinned in [`sdk/src/
 ### 2. Install the SDK
 
 ```bash
-npm install @arc/agent-identity
+npm install @stoa-agents/arc-agent-identity
 ```
 
 ### 3. Register, publish, verify
 
 ```ts
-import { AgentRegistry, uploadToIrys, ARC_TESTNET_CHAIN_ID } from '@arc/agent-identity'
+import { AgentRegistry, uploadToIrys, ARC_TESTNET_CHAIN_ID } from '@stoa-agents/arc-agent-identity'
 
 const registry = new AgentRegistry({
   privateKey: process.env.PRIVATE_KEY!,
@@ -86,7 +86,7 @@ Two, with intentionally small surface area.
 
 **Identity.** `bytes32 agentId = keccak256(abi.encodePacked(msg.sender, nonce))`. One address can register many agents without collision because the nonce increments per address. The mapping `agentOwner[agentId] → address` is the only piece of state the contract keeps about identity. There is no upgrade path; the identity is permanent for the lifetime of the deployment.
 
-**Append-only attestation.** `publishTrace(agentId, marketId, traceHash, rating, confidenceBps, irysReceipt)` emits a `TracePublished` event. The contract enforces three things: only the owner can publish under their `agentId`, rating is in `[-3, 3]`, and confidence is in `[0, 10000]` basis points. Everything else is opaque to the contract — `marketId` is a free-form `bytes32`, `irysReceipt` is a free-form string, `traceHash` is whatever the caller computed.
+**Append-only attestation.** `publishTrace(agentId, marketId, traceHash, rating, confidenceBps, irysReceipt)` emits a `TracePublished` event. The contract enforces three things: only the owner can publish under their `agentId`, rating is in `[-3, 3]`, and confidence is in `[0, 10000]` basis points. Everything else is opaque to the contract, `marketId` is a free-form `bytes32`, `irysReceipt` is a free-form string, `traceHash` is whatever the caller computed.
 
 The SDK adds canonicalization (sorted-key JSON keccak256) and an Irys upload helper, so the trace body is reproducible from its receipt and the on-chain hash can be verified against the body any indexer downloads.
 
@@ -104,11 +104,11 @@ The two stacks compose. A trading agent built on this repo can settle USDC trade
 
 ## Design notes
 
-The contract is deliberately under-engineered. No proxy. No ownable. No pause. No upgrade. If you need any of those, redeploy with the additions — the contract is so small that "redeploy" is the upgrade path. The Arc OSS reference instance is pinned in the SDK so you can read events historically even after a redeploy.
+The contract is deliberately under-engineered. No proxy. No ownable. No pause. No upgrade. If you need any of those, redeploy with the additions, the contract is so small that "redeploy" is the upgrade path. The Arc OSS reference instance is pinned in the SDK so you can read events historically even after a redeploy.
 
-The SDK is deliberately bundler-agnostic. It imports viem and zod, exports ESM, and has no peer dependencies. Bun, Deno, Node, edge runtimes — all fine. The Irys helper uses `fetch` rather than `@irys/sdk` for the same reason; if you need signed uploads you can layer the official SDK on top.
+The SDK is deliberately bundler-agnostic. It imports viem and zod, exports ESM, and has no peer dependencies. Bun, Deno, Node, edge runtimes, all fine. The Irys helper uses `fetch` rather than `@irys/sdk` for the same reason; if you need signed uploads you can layer the official SDK on top.
 
-The trace schema is `agent.trace.v1`. If you need a different shape, fork the Zod schema. The contract does not enforce any schema — `traceHash` is opaque to it — so versioning the schema is a pure off-chain concern.
+The trace schema is `agent.trace.v1`. If you need a different shape, fork the Zod schema. The contract does not enforce any schema, `traceHash` is opaque to it, so versioning the schema is a pure off-chain concern.
 
 ## Reference deployments
 
@@ -127,7 +127,7 @@ arc-agent-identity/
 │   ├── test/AgentRegistry.t.sol        # 9 tests, all passing
 │   ├── script/Deploy.s.sol
 │   └── foundry.toml
-├── sdk/                                # @arc/agent-identity
+├── sdk/                                # @stoa-agents/arc-agent-identity
 │   ├── src/
 │   │   ├── client.ts
 │   │   ├── irys.ts

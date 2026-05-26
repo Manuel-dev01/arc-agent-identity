@@ -4,7 +4,7 @@ pragma solidity ^0.8.26;
 /// @title AgentRegistry
 /// @notice On-chain identity registry and append-only reasoning-trace publication for autonomous agents.
 /// @dev Each bytes32 agentId is owned by exactly one address. No edit, delete, or invalidate
-///      function exists — trace events are append-only. The contract has no constructor parameters,
+///      function exists, trace events are append-only. The contract has no constructor parameters,
 ///      no owner, no pause, and no upgrade path. Deployed without ceremony, by design.
 contract AgentRegistry {
     // --- Events ---
@@ -48,10 +48,10 @@ contract AgentRegistry {
 
     /// @notice Publish a reasoning trace on-chain.
     /// @dev Invariant: only the agent's owner can publish traces under that agentId.
-    ///      Invariant: trace events are append-only — no edit, delete, or invalidate exists.
-    ///      `marketId` is a free-form bytes32 — callers choose its derivation (e.g. keccak of
+    ///      Invariant: trace events are append-only, no edit, delete, or invalidate exists.
+    ///      `marketId` is a free-form bytes32, callers choose its derivation (e.g. keccak of
     ///      a venue-specific market identifier, condition id, or arbitrary topic hash).
-    ///      `irysReceipt` is a free-form string — typically an Irys/Arweave id, but the contract
+    ///      `irysReceipt` is a free-form string, typically an Irys/Arweave id, but the contract
     ///      does not enforce a format. Any content-addressed receipt works.
     function publishTrace(
         bytes32 agentId,

@@ -1,14 +1,16 @@
 {
-  "name": "@arc/agent-identity",
+  "name": "@stoa-agents/arc-agent-identity",
   "version": "0.1.0",
   "description": "On-chain agent identity and append-only reasoning-trace anchoring for Arc. Composable SDK around AgentRegistry.sol.",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     }
   },
   "files": [
@@ -16,10 +18,12 @@
     "src",
     "README.md"
   ],
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Manuel-dev01/arc-agent-identity.git",
+    "directory": "sdk"
   },
+  "homepage": "https://github.com/Manuel-dev01/arc-agent-identity#readme",
   "keywords": [
     "arc",
     "circle",
@@ -29,7 +33,11 @@
     "irys",
     "bytes32"
   ],
-  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "tsc"
+  },
   "dependencies": {
     "viem": "^2.0.0",
     "zod": "^3.23.0"

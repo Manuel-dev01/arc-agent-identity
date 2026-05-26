@@ -76,7 +76,7 @@ def hash_trace(trace: dict) -> bytes:
 
 
 def upload_to_irys(data: dict, node_url: str = "https://node2.irys.xyz") -> str:
-    """HTTP-only Irys upload — no Node SDK dep."""
+    """HTTP-only Irys upload, no Node SDK dep."""
     resp = httpx.post(f"{node_url}/tx/data", json=data, timeout=30.0)
     resp.raise_for_status()
     body = resp.json()

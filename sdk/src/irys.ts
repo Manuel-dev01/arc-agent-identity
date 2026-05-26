@@ -1,7 +1,7 @@
 /**
  * Irys HTTP upload utility.
  *
- * Uses the Irys HTTP gateway directly — no Node.js SDK dependency. This means
+ * Uses the Irys HTTP gateway directly, no Node.js SDK dependency. This means
  * the upload path works from any runtime that has fetch() (Node, Deno, Bun,
  * browser, edge functions, Python via httpx, etc).
  *
@@ -13,7 +13,7 @@
 const DEFAULT_IRYS_NODE = 'https://node2.irys.xyz'
 
 export interface IrysUploadResult {
-  /** The Irys transaction id — store this on-chain as the irysReceipt */
+  /** The Irys transaction id, store this on-chain as the irysReceipt */
   id: string
   /** Alias for id, kept for backward compatibility */
   receipt: string
